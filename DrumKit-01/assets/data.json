@@ -1,0 +1,30 @@
+[
+    {
+    "key": "A",
+    "name":"Clap"
+}, {
+    "key": "S",
+    "name":"Hihat"
+}, {
+    "key": "D",
+    "name":"Kick"
+}, {
+    "key": "F",
+    "name":"Openhat"
+}, {
+    "key": "G",
+    "name":"Boom"
+}, {
+    "key": "H",
+    "name":"Ride"
+}, {
+    "key": "J",
+    "name":"Snare"
+}, {
+    "key": "K",
+    "name":"Tom"
+},{
+    "key": "L",
+    "name":"Tink"
+ } 
+]

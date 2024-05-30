@@ -13,6 +13,7 @@ body{
   background-color: rgba(175, 158, 158, 0.356);
   height: 100vh;
   display: flex;
+  gap: 20px;
   justify-content: center;
   align-items: center;
 }
@@ -27,7 +28,7 @@ body{
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 26px;
   font-weight: 600;
-  width: fit-content;
+  width: 70px;
 }
 .key-pad>span{
   color: #dbc608;
