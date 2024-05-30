@@ -30,7 +30,7 @@ body::before{
   z-index: 2000;
 }
 .key-pad{
-  border: 2px solid rgb(180, 112, 112);
+  border: 2px solid rgb(255, 116, 116);
   border-radius: 4px;
   padding: 6px 10px;
   color: white;
