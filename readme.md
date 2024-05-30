@@ -42,7 +42,7 @@ Welcome to DrumKit-01, part of the 30 Days of JavaScript challenge. This project
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/DrumKit-01.git
+git clone https://github.com/Shahinul-Islam/JS-30-days-challenge.git
 ```
 
 ## Features
