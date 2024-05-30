@@ -21,7 +21,7 @@ Welcome to DrumKit-01, part of the 30 Days of JavaScript challenge. This project
 - **Snowfall Animation**: Adds a falling snow effect to the background, creating a festive atmosphere.
 - **Data Fetching**: Uses the Fetch API to load data from `data.json` and dynamically create the keypad with sounds.
 - **Event Handling**: Listens for keydown events and animates the corresponding key.
-- **Media Queries**: Adjusts the keypad layout between block and grid display based on the device screen size.
+- **Media Queries**: Adjust the keypad layout between block and grid display based on the device screen size.
 - **CSS Animations**: Utilizes `@keyframes` for keypad and background animations.
 
 ## Technologies Used
