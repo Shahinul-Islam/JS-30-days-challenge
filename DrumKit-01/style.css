@@ -7,28 +7,42 @@ body{
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+  position: relative;
+  
+}
+body::before{
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.911);
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 2;
 }
 
 .key-container{
-  background-color: rgba(175, 158, 158, 0.356);
   height: 100vh;
   display: flex;
   gap: 20px;
   justify-content: center;
   align-items: center;
+  z-index: 2000;
 }
 .key-pad{
-  border: 2px solid rgb(5, 5, 5);
+  border: 2px solid rgb(180, 112, 112);
   border-radius: 4px;
   padding: 6px 10px;
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   font-family: Georgia, 'Times New Roman', Times, serif;
   font-size: 26px;
   font-weight: 600;
   width: 70px;
+  z-index: 99;
 }
 .key-pad>span{
   color: #dbc608;
@@ -38,8 +52,8 @@ body{
 }
 
 .key-pad-effect{
-  animation: scaleAnimation 0.5s ease-in;
-  box-shadow: 2px 2px 20px 5px #fffdef63;
+  animation: scaleAnimation 1s ease-in;
+  box-shadow: 2px 2px 20px 5px #ffe20863;
 
 }
 @keyframes scaleAnimation{
@@ -47,7 +61,18 @@ body{
     width: fit-content;
   }
   100%{
-    transform: scale(5);
+    transform: scale(12);
     
+  }
+}
+
+/* resposive for mobile devices */
+@media only screen and (max-width: 600px) {
+  .key-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    place-items: center;
+
   }
 }
