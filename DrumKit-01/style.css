@@ -1,0 +1,52 @@
+body{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  background:url('assets/images/bg.webp');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+.key-container{
+  background-color: rgba(175, 158, 158, 0.356);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.key-pad{
+  border: 2px solid rgb(5, 5, 5);
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 26px;
+  font-weight: 600;
+  width: fit-content;
+}
+.key-pad>span{
+  color: #dbc608;
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1.4px;
+}
+
+.key-pad-effect{
+  animation: scaleAnimation 0.5s ease-in;
+  box-shadow: 2px 2px 20px 5px #fffdef63;
+
+}
+@keyframes scaleAnimation{
+  0%{
+    width: fit-content;
+  }
+  100%{
+    transform: scale(5);
+    
+  }
+}
