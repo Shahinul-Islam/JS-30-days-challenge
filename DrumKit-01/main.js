@@ -57,3 +57,17 @@ document.addEventListener("keyup", function (event) {
 		}, 300);
 	}
 });
+
+//generate paragraph from sentences.json
+const text = document.querySelector(".text");
+const paragraph = document.createElement("p");
+
+fetch("./assets/sentences.json")
+	.then((res) => res.json())
+	.then((data) => {
+		data.map((text) => {
+			paragraph.innerText = text.text;
+		});
+	});
+
+text.appendChild(paragraph);
