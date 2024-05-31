@@ -8,7 +8,6 @@ body{
   background-size: cover;
   height: 100vh;
   position: relative;
-  
 }
 body::before{
   content: "";
@@ -20,8 +19,44 @@ body::before{
   left: 0;
   z-index: 2;
 }
+/* change the cursor pointer on screen hover*/
+body:hover{
+  cursor: url('assets/images/drumkit.png'), pointer;
+}
 
-
+.key-container{
+  height: 100vh;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  place-items: center;
+  z-index: 2000;
+}
+.key-pad{
+  border: 2px solid rgb(255, 116, 116);
+  border-radius: 4px;
+  padding: 6px 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 26px;
+  font-weight: 600;
+  width: 80px;
+  z-index: 99;
+}
+.key-pad>span{
+  color: #dbc608;
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1.4px;
+}
+.key-pad-effect{
+  animation: scaleAnimation .3s ease-in-out;
+  box-shadow: 2px 2px 20px 5px #ffe20863;
+}
 .snow, .snow::after, .snow::before{
   position: absolute;
   top: 0;
@@ -38,72 +73,79 @@ body::before{
                    radial-gradient(3px 3px at 740px 60px, #fff, transparent 50%),
                     radial-gradient(6px 6px at 800px 120px, #fff, transparent 50%),
                     radial-gradient(9px 9px at 900px 220px, #fff, transparent 50%);
-  background-size: 600px 200px;
-  animation: animate 10s linear infinite;
+  background-size: 700px 200px;
+  animation: animate 40s ease infinite;
   z-index: 120;
 }
 .snow::after{
   margin-left: -250px;
   opacity: .5;
   filter: blur(2px);
-
 }
 .snow::before{
   margin-left: -350px;
   opacity: .7;
   filter: blur(1px);
-
 }
-.key-container{
-  height: 100vh;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
-  align-items: center;
+.loading {
+  display: inline-flex;
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%);
+  gap: 10px;
   z-index: 2000;
 }
-.key-pad{
-  border: 2px solid rgb(255, 116, 116);
-  border-radius: 4px;
-  padding: 6px 10px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 26px;
-  font-weight: 600;
-  width: 70px;
-  z-index: 99;
+.loading:before,
+.loading:after {
+  content: "";
+  height: 20px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    radial-gradient(farthest-side,#000 95%,#0000) 35% 35%/6px 6px no-repeat
+    #fff;
+  transform: scaleX(var(--s,1)) rotate(0deg);
+  animation: l6 1s infinite linear;
 }
-.key-pad>span{
-  color: #dbc608;
-  font-size: 16px;
-  font-weight: 200;
-  letter-spacing: 1.4px;
+.loading:after {
+  --s: -1;
+  animation-delay:-0.1s;
 }
 
-.key-pad-effect{
-  animation: scaleAnimation 1s ease-in;
-  box-shadow: 2px 2px 20px 5px #ffe20863;
-
+@keyframes l6 {
+  100% {transform:scaleX(var(--s,1)) rotate(360deg);}
 }
+
+/* animations */
+/* key-pad scale animation */
 @keyframes scaleAnimation{
   0%{
-    width: fit-content;
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(1.2); 
   }
   100%{
-    transform: scale(12);
-    
+    transform: scale(1); 
   }
 }
+/* snow animation */
 @keyframes animate{
   0%{
     background-position: -700px 0;
   }
   100%{
     background-position: 0px 700px;
+  }
+}
+/* spinning animation */
+@keyframes spin{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
   }
 }
 
@@ -114,10 +156,29 @@ body::before{
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(6, 1fr);
     place-items: center;
+    gap: 10px;
 
   }
 }
-/* change the cursor pointer on screen hover*/
-body:hover{
-  cursor: url('assets/images/cursor.png'), pointer;
+
+/* media query for screen size 600px and above */
+@media screen and (min-width: 600px) {
+  .key-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    place-items: center;
+    gap: 10px;
+  }
+}
+
+/* media query for screen size 857 and above */
+@media screen and (min-width: 857px) {
+  .key-container{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
+    place-items: center;
+    gap: 10px;}
+  
 }

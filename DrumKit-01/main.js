@@ -1,5 +1,24 @@
-const keyContainer = document.querySelector(".key-container");
+document.addEventListener("DOMContentLoaded", function () {
+	const loadingDiv = document.querySelector(".loading");
 
+	document.onreadystatechange = function () {
+		if (document.readyState !== "complete") {
+			loadingDiv.style.display = "block";
+		} else {
+			loadingDiv.style.display = "none";
+		}
+	};
+});
+
+document.onreadystatechange = function () {
+	if (document.readyState === "complete") {
+		clearInterval(loadingInterval);
+		loadingDiv.parentNode.removeChild(loadingDiv);
+	}
+};
+
+const keyContainer = document.querySelector(".key-container");
+//fetch data from json
 fetch("./assets/data.json")
 	.then((res) => res.json())
 	.then((data) => {
@@ -12,13 +31,17 @@ fetch("./assets/data.json")
 		});
 	});
 
+//play audio
 let currentAudio = null;
+let isAnimating = false;
 
-document.addEventListener("keydown", function (event) {
+document.addEventListener("keyup", function (event) {
 	let key = event.key.toUpperCase();
 	let keyPad = document.getElementById(key);
 
-	if (keyPad) {
+	if (keyPad && !isAnimating) {
+		isAnimating = true;
+
 		if (currentAudio) {
 			currentAudio.pause();
 			currentAudio.currentTime = 0;
@@ -30,6 +53,7 @@ document.addEventListener("keydown", function (event) {
 
 		setTimeout(function () {
 			keyPad.classList.remove("key-pad-effect");
-		}, 100);
+			isAnimating = false;
+		}, 300);
 	}
 });
