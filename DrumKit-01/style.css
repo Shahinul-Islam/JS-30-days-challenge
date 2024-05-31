@@ -20,13 +20,10 @@ body::before{
   left: 0;
   z-index: 2;
 }
-.snow-wrap{
 
-}
+
 .snow, .snow::after, .snow::before{
   position: absolute;
-  /* width: 100%; */
-  /* height: 100%; */
   top: 0;
   bottom: 0;
   left: 0;
@@ -124,36 +121,3 @@ body::before{
 body:hover{
   cursor: url('assets/images/cursor.png'), pointer;
 }
-/*
-This document is a list of what i have done in the DrumKit-01 folder of my 30 days of JavaScript challenge.
-
-I have created a background image of a snowman, created a key pad with the keys A, S, D, F, G, H, J, K, and L, given them the names of different drum sounds, and given them corresponding sounds when the keys are pressed. I have also added animations to the key pad when a key is pressed.
-
-I have also added a responsive design for mobile devices, and changed the cursor pointer on screen hover to a drumstick cursor.
-
-I have also added snow falling animation to the background to give the effect of snow falling from the top of the screen.
-
-I have also used the fetch API to get the data from the data.json file and then used the data to create the key pad and add the sounds to the key pad.
-
-I have used the addEventListener method to listen for the keydown event and then used the event object to get the key that was pressed. I have also used the setTimeout method to remove the animation class from the key pad after a certain amount of time.
-
-I have used the Media Queries to change the display of the key pad from a block element to a grid element on mobile devices.
-
-I have used the @keyframes rule to create the animation for the key pad and the background image.
-
-I have used the url() function to give the background image a url of the snowman image, and the url() function to give the background image a url of the snowman image.
-
-I have used the transform property to scale the key pad when a key is pressed.
-
-I have used the transition property to give the scale animation a smooth animation.
-
-I have used the cursor property to give the screen a drumstick cursor when the user hovers over the screen.
-
-I have used the animation-fill-mode property to keep the animation visible after it has finished running.
-
-I have used the animation-direction property to run the animation backwards when it has finished running.
-
-I have used the animation-iteration-count property to run the animation only once.
-
-I have used the animation property to give the animation a name of "scaleAnimation", and the animation property to give the animation a name of "animate".
-*/
