@@ -71,3 +71,28 @@ fetch("./assets/sentences.json")
 	});
 
 text.appendChild(paragraph);
+// get the text area every text and match it with the text in the paragraph
+
+const typingBox = document.querySelector(".typing-box");
+
+typingBox.addEventListener("keydown", function (event) {
+	const textArea = event.target;
+	const textValue = textArea.value;
+	const paragraphText = paragraph.innerText;
+	let coloredText = "";
+	let isCorrect = true;
+
+	for (let i = 0; i < textValue.length; i++) {
+		if (textValue[i] === paragraphText[i]) {
+			coloredText += `<span style="color:#fff">${textValue[i]}</span>`;
+		} else {
+			coloredText += `<span style="color: red; text-decoration: underline;">${textValue[i]}</span>`;
+			isCorrect = false;
+		}
+	}
+
+	textArea.innerHTML = coloredText;
+	if (isCorrect && textValue.length === paragraphText.length) {
+		// Add any additional logic when the text matches completely
+	}
+});

@@ -6,7 +6,7 @@ body{
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 200vh;
   position: relative;
 }
 body::before{
@@ -114,7 +114,7 @@ body:hover{
 }
 .text{
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -35%);
   z-index: 2000;
@@ -129,7 +129,7 @@ body:hover{
   height: 400px;
   width: 80%;
   position: absolute;
-  top: 70%;
+  top: 40%;
   left: 50%;
   transform: translate(-40%, -10%);
   z-index: 1000;
