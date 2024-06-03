@@ -1,21 +1,24 @@
-const keyContainer = document.querySelector(".key-container");
-const text = document.querySelector(".text");
-const inputField = document.getElementById("userInput");
-const loadingDiv = document.querySelector(".loading");
-
 document.addEventListener("DOMContentLoaded", function () {
+	const loadingDiv = document.querySelector(".loading");
+
 	document.onreadystatechange = function () {
 		if (document.readyState !== "complete") {
 			loadingDiv.style.display = "block";
-			inputField.style.display = "none";
 		} else {
 			loadingDiv.style.display = "none";
-			inputField.style.display = "block";
 		}
 	};
 });
 
-//fetch data from json
+document.onreadystatechange = function () {
+	if (document.readyState === "complete") {
+		clearInterval(loadingInterval);
+		loadingDiv.parentNode.removeChild(loadingDiv);
+	}
+};
+
+const keyContainer = document.querySelector(".key-container");
+// Fetch data from JSON
 fetch("./assets/data.json")
 	.then((res) => res.json())
 	.then((data) => {
@@ -28,7 +31,7 @@ fetch("./assets/data.json")
 		});
 	});
 
-//play audio
+// Play audio
 let currentAudio = null;
 let isAnimating = false;
 
@@ -39,16 +42,14 @@ document.addEventListener("keyup", function (event) {
 	if (keyPad && !isAnimating) {
 		isAnimating = true;
 
-		if (currentAudio && !currentAudio.paused) {
+		if (currentAudio) {
 			currentAudio.pause();
 			currentAudio.currentTime = 0;
 		}
 
 		keyPad.classList.add("key-pad-effect");
 		currentAudio = new Audio(`./assets/audio/${key}.mp3`);
-		currentAudio.play().catch((error) => {
-			console.error("Error playing audio:", error);
-		});
+		currentAudio.play();
 
 		setTimeout(function () {
 			keyPad.classList.remove("key-pad-effect");
@@ -58,25 +59,24 @@ document.addEventListener("keyup", function (event) {
 });
 
 // Generate paragraph from sentences.json
-
+const text = document.querySelector(".text");
 const paragraph = document.createElement("p");
 paragraph.setAttribute("id", "paragraph");
-
+const inputField = document.getElementById("userInput");
 let paragraphText = "";
 
 fetch("./assets/sentences.json")
 	.then((res) => res.json())
 	.then((data) => {
-		data.map((item) => {
-			paragraphText = item.text;
+		data.map((sentence) => {
+			paragraphText = sentence.text;
 			paragraph.innerHTML = paragraphText
 				.split("")
 				.map((char) => `<span>${char}</span>`)
 				.join("");
-			text.appendChild(paragraph);
 		});
 
-		//check if the typed charact right or wrong
+		text.appendChild(paragraph);
 
 		inputField.addEventListener("input", function () {
 			const userInput = inputField.value;
