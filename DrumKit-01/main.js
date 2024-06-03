@@ -1,23 +1,20 @@
-document.addEventListener("DOMContentLoaded", function () {
-	const loadingDiv = document.querySelector(".loading");
+const keyContainer = document.querySelector(".key-container");
+const text = document.querySelector(".text");
+const inputField = document.getElementById("userInput");
+const loadingDiv = document.querySelector(".loading");
 
+document.addEventListener("DOMContentLoaded", function () {
 	document.onreadystatechange = function () {
 		if (document.readyState !== "complete") {
 			loadingDiv.style.display = "block";
+			inputField.style.display = "none";
 		} else {
 			loadingDiv.style.display = "none";
+			inputField.style.display = "block";
 		}
 	};
 });
 
-document.onreadystatechange = function () {
-	if (document.readyState === "complete") {
-		clearInterval(loadingInterval);
-		loadingDiv.parentNode.removeChild(loadingDiv);
-	}
-};
-
-const keyContainer = document.querySelector(".key-container");
 //fetch data from json
 fetch("./assets/data.json")
 	.then((res) => res.json())
@@ -42,14 +39,16 @@ document.addEventListener("keyup", function (event) {
 	if (keyPad && !isAnimating) {
 		isAnimating = true;
 
-		if (currentAudio) {
+		if (currentAudio && !currentAudio.paused) {
 			currentAudio.pause();
 			currentAudio.currentTime = 0;
 		}
 
 		keyPad.classList.add("key-pad-effect");
 		currentAudio = new Audio(`./assets/audio/${key}.mp3`);
-		currentAudio.play();
+		currentAudio.play().catch((error) => {
+			console.error("Error playing audio:", error);
+		});
 
 		setTimeout(function () {
 			keyPad.classList.remove("key-pad-effect");
@@ -58,41 +57,41 @@ document.addEventListener("keyup", function (event) {
 	}
 });
 
-//generate paragraph from sentences.json
-const text = document.querySelector(".text");
+// Generate paragraph from sentences.json
+
 const paragraph = document.createElement("p");
+paragraph.setAttribute("id", "paragraph");
+
+let paragraphText = "";
 
 fetch("./assets/sentences.json")
 	.then((res) => res.json())
 	.then((data) => {
-		data.map((text) => {
-			paragraph.innerText = text.text;
+		data.map((item) => {
+			paragraphText = item.text;
+			paragraph.innerHTML = paragraphText
+				.split("")
+				.map((char) => `<span>${char}</span>`)
+				.join("");
+			text.appendChild(paragraph);
+		});
+
+		//check if the typed charact right or wrong
+
+		inputField.addEventListener("input", function () {
+			const userInput = inputField.value;
+			const spans = paragraph.querySelectorAll("span");
+
+			for (let i = 0; i < spans.length; i++) {
+				if (i < userInput.length) {
+					if (userInput[i] === paragraphText[i]) {
+						spans[i].classList.remove("incorrect");
+					} else {
+						spans[i].classList.add("incorrect");
+					}
+				} else {
+					spans[i].classList.remove("incorrect");
+				}
+			}
 		});
 	});
-
-text.appendChild(paragraph);
-// get the text area every text and match it with the text in the paragraph
-
-const typingBox = document.querySelector(".typing-box");
-
-typingBox.addEventListener("keydown", function (event) {
-	const textArea = event.target;
-	const textValue = textArea.value;
-	const paragraphText = paragraph.innerText;
-	let coloredText = "";
-	let isCorrect = true;
-
-	for (let i = 0; i < textValue.length; i++) {
-		if (textValue[i] === paragraphText[i]) {
-			coloredText += `<span style="color:#fff">${textValue[i]}</span>`;
-		} else {
-			coloredText += `<span style="color: red; text-decoration: underline;">${textValue[i]}</span>`;
-			isCorrect = false;
-		}
-	}
-
-	textArea.innerHTML = coloredText;
-	if (isCorrect && textValue.length === paragraphText.length) {
-		// Add any additional logic when the text matches completely
-	}
-});

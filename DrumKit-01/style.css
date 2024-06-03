@@ -2,30 +2,16 @@ body{
   margin:0;
   padding:0;
   box-sizing: border-box;
-  background:url('assets/images/bg.webp');
+  background:linear-gradient(0deg, rgba(12, 5, 10, 0.5), rgba(0, 0, 0, .7)), url('assets/images/bg.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 200vh;
-  position: relative;
-}
-body::before{
-  content: "";
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.911);
   height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 2;
-}
-/* change the cursor pointer on screen hover*/
-body:hover{
-  cursor: url('assets/images/drumkit.png'), pointer;
 }
 
 .key-container{
-  height: 100vh;
+  padding: 30px;
+  height: 340px;
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -73,10 +59,11 @@ body:hover{
                    radial-gradient(3px 3px at 740px 60px, #fff, transparent 50%),
                     radial-gradient(6px 6px at 800px 120px, #fff, transparent 50%),
                     radial-gradient(9px 9px at 900px 220px, #fff, transparent 50%);
-  background-size: 700px 200px;
+  background-size: 700px 400px;
   animation: animate 40s ease infinite;
   z-index: 120;
 }
+
 .snow::after{
   margin-left: -250px;
   opacity: .5;
@@ -113,63 +100,50 @@ body:hover{
   animation-delay:-0.1s;
 }
 .text{
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -35%);
   z-index: 2000;
   color: white;
   font-size: 26px;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: center;
   letter-spacing: 1px;
+  width: 80%;
+  margin: 0 auto
 }
 
 .typing-box{
   height: 400px;
   width: 80%;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-40%, -10%);
   z-index: 1000;
+  margin:0 auto
 }
 
-.typing-box textarea {
-  height: 50%;
+.typing-box input {
   width: 80%;
   border-radius: 8px;
   padding: 10px;
   font-size: 20px;
   font-family: Georgia, 'Times New Roman', Times, serif;
   text-align: left;
+  overflow-x: hidden;
   overflow-y: scroll;
   resize: none;
-  background-color: #00000070;
+  background-color: #ffffff49;
   color: white;
   border: 2px solid #ffffff;
   margin: 20px auto;
   outline: none;
   scrollbar-width: none;
   line-height: 30px;
+  white-space: normal;
+  display:none
+}
+
+.incorrect {
+	color: red;
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-@keyframes l6 {
-  100% {transform:scaleX(var(--s,1)) rotate(360deg);}
-}
 
 /* animations */
 /* key-pad scale animation */
@@ -203,6 +177,10 @@ body:hover{
   }
 }
 
+@keyframes l6 {
+  100% {transform:scaleX(var(--s,1)) rotate(360deg);}
+}
+
 /* resposive for mobile devices */
 @media only screen and (max-width: 600px) {
   .key-container{
@@ -212,6 +190,18 @@ body:hover{
     place-items: center;
     gap: 10px;
 
+  }
+  .text{
+    margin-top: 350px;
+    width:98%;
+    font-size:16px;
+    font-weight:300;
+  }
+  .typing-box{
+    width: 100%;
+  }
+  .typing-box input{
+    font-size:16px
   }
 }
 
@@ -224,6 +214,18 @@ body:hover{
     place-items: center;
     gap: 10px;
   }
+  .text{
+    margin-top: 200px;
+    width:98%;
+    font-size:16px;
+    font-weight:300;
+  }
+  .typing-box{
+    width: 100%;
+  }
+  .typing-box input{
+    font-size:16px
+  }
 }
 
 /* media query for screen size 857 and above */
@@ -234,5 +236,14 @@ body:hover{
     grid-template-rows: repeat(9, 1fr);
     place-items: center;
     gap: 10px;}
+    .text{
+      margin-top: 30px;
+      width:98%;
+      font-size:16px;
+      font-weight:300;
+    }
+    .typing-box{
+      width: 100%;
+    }
   
 }
