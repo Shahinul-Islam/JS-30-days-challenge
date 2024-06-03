@@ -76,7 +76,10 @@ body{
   width: 80%;
   display: flex;
   justify-content: center;
+  align-items: center;
   margin:0 auto;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .typing-box input {
@@ -89,6 +92,17 @@ body{
   color: white;
   border: 2px solid #ffffff;
   line-height: 30px;
+}
+.typing-box button{
+  width: 10%;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #070505b0;
+  color: white;
+  border: 2px solid #ffffff;
+  cursor: pointer;
 }
 
 .incorrect{
@@ -133,6 +147,9 @@ body{
     width: 100%;
     padding-bottom: 10px;
   }
+  .typing-box button{
+    width: 24%;
+  }
 }
 
 /* media query for screen size 600px and above */
@@ -153,6 +170,9 @@ body{
 .typing-box{
   width: 100%;
   padding-bottom: 10px;
+}
+.typing-box button{
+  width: 26%;
 }
   
 }
