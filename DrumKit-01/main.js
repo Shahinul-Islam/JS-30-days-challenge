@@ -1,11 +1,19 @@
-document.addEventListener("DOMContentLoaded", function () {
-	const loadingDiv = document.querySelector(".loading");
+const mainContainer = document.getElementById("mainContainer");
+const keyContainer = document.querySelector(".key-container");
+const text = document.querySelector(".text");
+const inputField = document.getElementById("userInput");
+const loadingDiv = document.querySelector(".loading");
+const typingSpeedP = document.querySelector(".typingSpeed p");
+const submitButton = document.querySelector(".typing-box button");
+// console.log(submitButton);
 
+document.addEventListener("DOMContentLoaded", function () {
 	document.onreadystatechange = function () {
 		if (document.readyState !== "complete") {
 			loadingDiv.style.display = "block";
 		} else {
 			loadingDiv.style.display = "none";
+			mainContainer.style.display = "block";
 		}
 	};
 });
@@ -17,7 +25,6 @@ document.onreadystatechange = function () {
 	}
 };
 
-const keyContainer = document.querySelector(".key-container");
 // Fetch data from JSON
 fetch("./assets/data.json")
 	.then((res) => res.json())
@@ -59,10 +66,10 @@ document.addEventListener("keyup", function (event) {
 });
 
 // Generate paragraph from sentences.json
-const text = document.querySelector(".text");
+
 const paragraph = document.createElement("p");
 paragraph.setAttribute("id", "paragraph");
-const inputField = document.getElementById("userInput");
+
 let paragraphText = "";
 
 fetch("./assets/sentences.json")
@@ -78,12 +85,23 @@ fetch("./assets/sentences.json")
 
 		text.appendChild(paragraph);
 
+		let startTime = [];
+		let endTime;
+
 		inputField.addEventListener("input", function () {
 			const userInput = inputField.value;
+
+			if (userInput) {
+				startTime.push(new Date().getTime());
+				// console.log(startTime[0]);
+			}
+
+			let charactersTyped = 0;
 			const spans = paragraph.querySelectorAll("span");
 
 			for (let i = 0; i < spans.length; i++) {
 				if (i < userInput.length) {
+					charactersTyped += 1;
 					if (userInput[i] === paragraphText[i]) {
 						spans[i].classList.remove("incorrect");
 					} else {
@@ -93,5 +111,16 @@ fetch("./assets/sentences.json")
 					spans[i].classList.remove("incorrect");
 				}
 			}
+			const grossWPM = Math.round(charactersTyped / 5);
+			// let wpm = grossWPM / 2;
+			// console.log(wpm);
+			submitButton.addEventListener("click", function () {
+				const submitTime = new Date().getTime();
+				const totalTime = Math.round(((submitTime - startTime[0]) / 1000) * 60);
+				console.log(grossWPM, totalTime);
+				const userWPM = Math.round(grossWPM / totalTime);
+
+				typingSpeedP.innerHTML = `Typing Speed: ${userWPM} wpm`;
+			});
 		});
 	});
