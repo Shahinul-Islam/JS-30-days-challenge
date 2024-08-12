@@ -2,6 +2,8 @@
 
 Welcome to DrumKit-01, part of the 30 Days of JavaScript challenge. This project features a dynamic and interactive drum kit with various visual and audio effects, designed to enhance your coding skills through creative and engaging tasks.
 
+## Live Link: https://js-drum-kit-01.netlify.app/
+
 ## Table of Contents
 
 - [Features](#features)
